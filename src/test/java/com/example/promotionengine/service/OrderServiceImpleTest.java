@@ -48,9 +48,6 @@ public class OrderServiceImpleTest {
         products.add(new Product("B", 30.0, 1));
         products.add(new Product("c", 20.0, 1));
         Order order = new Order(1, products);
-
-//        Mockito.when(promoServiceImpl.findPromoByProdId("A", promotions))
-//                .thenReturn(Optional.of(promotions.get(0)));
         Double price = iOrderService.getTotalPrice(products, promotions);
         Assertions.assertEquals(100, price);
     }
