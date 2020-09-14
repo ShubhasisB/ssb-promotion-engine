@@ -10,7 +10,6 @@ import java.util.Optional;
 @Service
 public class OrderServiceImple implements IOrderService {
 
-
     public Double getTotalPrice(List<Product> products, List<Promotion> promotions) {
         Double total_price = 0.0;
         IPromoService promoService = new PromoServiceImple();
@@ -34,7 +33,6 @@ public class OrderServiceImple implements IOrderService {
 
             total_price = total_price + product_price + promo_price;
         }
-
 
         return total_price;
 

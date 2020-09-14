@@ -10,7 +10,6 @@ import java.util.Optional;
 @Service
 public class PromoServiceImple implements IPromoService {
 
-
     public Optional<Promotion> findPromoByProdId(String prod_id, List<Promotion> promotionList) {
 
         Optional<Promotion> mappedPromotion = promotionList.stream().filter(promotion ->
