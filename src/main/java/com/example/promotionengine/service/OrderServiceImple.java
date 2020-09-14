@@ -10,36 +10,33 @@ import java.util.Optional;
 @Service
 public class OrderServiceImple implements IOrderService {
 
-//        @Autowired
-//        private IPromoService promoService;
 
-
-        public Double getTotalPrice (List < Product > products, List < Promotion > promotions){
-            Double total_price = 0.0;
-             IPromoService promoService = new PromoServiceImple();
-            for (Product product : products) {
-                Integer ordered_qnty = product.getQuantity();
-                Double promo_price = 0.0;
-                Double product_price = 0.0;
-                Optional<Promotion> applied_promo = promoService.findPromoByProdId(product.getId(), promotions);
-                if (applied_promo.isPresent()) {
-                    Promotion promo = applied_promo.get();
-                    Integer promo_qnty = promo.getProductInfo().get(product.getId());
-                    while (promo_qnty <= ordered_qnty) {
-                        promo_price += promo.getPromoPrice();
-                        ordered_qnty -= promo_qnty;
-                    }
-
-                }
-                if (ordered_qnty > 0) {
-                    product_price = ordered_qnty * product.getUnitPrice();
+    public Double getTotalPrice(List<Product> products, List<Promotion> promotions) {
+        Double total_price = 0.0;
+        IPromoService promoService = new PromoServiceImple();
+        for (Product product : products) {
+            Integer ordered_qnty = product.getQuantity();
+            Double promo_price = 0.0;
+            Double product_price = 0.0;
+            Optional<Promotion> applied_promo = promoService.findPromoByProdId(product.getId(), promotions);
+            if (applied_promo.isPresent()) {
+                Promotion promo = applied_promo.get();
+                Integer promo_qnty = promo.getProductInfo().get(product.getId());
+                while (promo_qnty <= ordered_qnty) {
+                    promo_price += promo.getPromoPrice();
+                    ordered_qnty -= promo_qnty;
                 }
 
-                total_price = total_price + product_price + promo_price;
+            }
+            if (ordered_qnty > 0) {
+                product_price = ordered_qnty * product.getUnitPrice();
             }
 
-
-            return total_price;
-
+            total_price = total_price + product_price + promo_price;
         }
+
+
+        return total_price;
+
     }
+}
