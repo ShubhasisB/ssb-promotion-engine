@@ -2,7 +2,6 @@ package com.example.promotionengine.service;
 
 import com.example.promotionengine.domain.Product;
 import com.example.promotionengine.domain.Promotion;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

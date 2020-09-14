@@ -1,10 +1,13 @@
 package com.example.promotionengine.service;
 
+import com.example.promotionengine.domain.Order;
+import com.example.promotionengine.domain.Product;
 import com.example.promotionengine.domain.Promotion;
 import org.junit.Before;
+import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
@@ -16,8 +19,6 @@ public class OrderServiceImpleTest {
 
     @InjectMocks
     IOrderService iOrderService = new OrderServiceImple();
-    @Mock
-    PromoServiceImple promoServiceImpl;
 
     private List<Promotion> promotions;
 
@@ -39,6 +40,23 @@ public class OrderServiceImpleTest {
         promotions.add(new Promotion(3, 30.0, "Fixed Price", promo_product_map3));
 
     }
+
+    @Test
+    public void test_first_use_case() {
+        List<Product> products = new ArrayList<Product>();
+        products.add(new Product("A", 50.0, 1));
+        products.add(new Product("B", 30.0, 1));
+        products.add(new Product("c", 20.0, 1));
+        Order order = new Order(1, products);
+
+//        Mockito.when(promoServiceImpl.findPromoByProdId("A", promotions))
+//                .thenReturn(Optional.of(promotions.get(0)));
+        Double price = iOrderService.getTotalPrice(products, promotions);
+        Assertions.assertEquals(100, price);
+    }
+
+
+
 
 
 }
