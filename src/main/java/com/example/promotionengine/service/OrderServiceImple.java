@@ -11,13 +11,13 @@ import java.util.Optional;
 @Service
 public class OrderServiceImple implements IOrderService {
 
-        @Autowired
-        private IPromoService promoService;
+//        @Autowired
+//        private IPromoService promoService;
 
 
         public Double getTotalPrice (List < Product > products, List < Promotion > promotions){
             Double total_price = 0.0;
-
+             IPromoService promoService = new PromoServiceImple();
             for (Product product : products) {
                 Integer ordered_qnty = product.getQuantity();
                 Double promo_price = 0.0;
